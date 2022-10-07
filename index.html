@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora IMC - JS Vanilla</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <section class="container">
+        <div class="calc-container">
+
+            <h2>Calculadora IMC</h2>
+            <form action="#" id="imc-form">
+                <div class="form-inputs">
+                    <div class="form-control">
+                        <label for="height">Altura:</label>
+                        <input 
+                            type="text" 
+                            name="height" 
+                            id="heihgt" 
+                            placeholder="Exemplo 1,75"
+                        />
+
+                        <div class="form-control">
+                            <label for="weight">Peso:</label>
+                            <input 
+                                type="text" 
+                                name="weight" 
+                                id="weight" 
+                                placeholder="Exemplo 76kg"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="action-control">
+                    <button id="calc-btn">Calcular</button>
+                    <button id="clear-btn">Limpar</button>
+                </div>
+            </form>
+
+            <div class="result-container">
+                <p id="imc-number">Seu IMC: <span></span> </p>
+                <p id="imc-info">Situacao Atual: <span></span> </p>
+                <h3>Confira as Classificacoes:</h3>
+
+                <div id="imc-table">
+                    <div class="table-header">
+                        <h4>IMC</h4>
+                        <h4>Classificacao</h4>
+                        <h4>Obesidade</h4>
+                    </div>
+                </div>
+                <button id="back-btn">Voltar</button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script src="js/app.js" defer></script>
+            <!-- O Atributo defer carrega o Javascript depois do HTML.-->
+</body>
+</html>
