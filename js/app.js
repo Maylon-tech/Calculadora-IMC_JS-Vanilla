@@ -55,6 +55,14 @@ const weightInput = document.querySelector("#weight")
 const calcBtn = document.querySelector("#calc-btn")
 const clearBtn = document.querySelector("#clear-btn")
 
+const calcContainer = document.querySelector("#calc.container")
+const resultContainer = document.querySelector("#result-container")
+
+const imcNumber = document.querySelector("#imc-number span")
+const imcInfo = document.querySelector("#imc-info")
+
+const backBtn = document.querySelector("#back-btn")
+
         // Funcao
 // Funcao para pegar os dados do array acima 'data' e organizar em uma tabela 'div'
 function createTable(data) {
@@ -93,32 +101,67 @@ function validDigits(text) {
 }
 
 
+function calcImc(weight, height) {
+    //Constante  que pega a formula do IMC.
+    const imc = (weight / (height * height)).toFixed(1)
+    return imc
+}
+
+// Essa funcao de mostart e esconder o calculo e reusltado ficara e, calcBtn evento.
+function showOrHideResults() {
+    calcContainer.classList.toggle("hide")
+    resultContainer.classList.toggle("hide")
+}
+
         // Inicializacao
 createTable(data)
 
 
         // Eventos
 // array para os Inputs - buscando os dois inputas para mesmo evento de Limpar.
+
 [heightInput, weightInput].forEach((elem) => {
     // Eento de click no botao de LImpar
     elem.addEventListener("input", (e) => {   //Evento de input - quando digita algo ele vai Ativar.
 
-        const updateValue = validDigits(e.target.value)  // Pega o valor atual Digitado.
+        const updatedValue = validDigits(e.target.value)  // Pega o valor atual Digitado.
         // O valor ditital atual e atualizar o valor pra depois limpar o valor ditado NAO permitido.
-        e.target.value = updateValue
+        e.target.value = updatedValue
 
     }) 
 })
 
 // Evento de CLick para o botao Calcular.
 calcBtn.addEventListener("click", (e) => {
-
     e.preventDefault()
 
     // Converter o texto do input para numeros.
     const height = +heightInput.value.replace(",", ".")
     const weight = +weightInput.value.replace(",", ".")
-    console.log(height, weight)
+    
+    // Validation - Se nao tiver peso OU nao tiver altura..!! entao retorna,..
+    if (!weight || !height) return
+
+    const imc = calcImc(weight, height)
+   
+
+    /* Percorrer todos os dados (data_array) usando o forEach()
+    E criando uma variavel que recebe o dado vindo do forEach()*/
+   let info 
+   data.forEach((item) => {
+    // O IF faz a verificacao para cada vez que o User for Calcular o IMC.
+    if(imc >= item.min && imc <= item.max) {
+        info = item.info
+    }
+   })
+    
+    // Se nao achou nenhum info entao Retorna.
+    if(!info) return
+
+    imcNumber.innerText =  imc
+    imcInfo.innerText = info
+
+    showOrHideResults()
 })
 
 
